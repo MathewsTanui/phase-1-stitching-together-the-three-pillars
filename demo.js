@@ -60,3 +60,33 @@ function mimicServerCall() {
     }, 300);
   });
 }
+
+// Step 1: Uncomment to locate the heart element
+let articleHearts = document.querySelectorAll('.like-glyph');
+console.log(articleHearts);
+
+// Step 2: Uncomment to set up mock server communication
+let serverResponse = {"articles": {
+  "article1": "This is the first article",
+  "article2": "This is the second article",
+  "article3": "This is the third article",
+  "article4": "This is the fourth article",
+  "article5": "This is the fifth article"
+}};
+let emptyHeart = '♡';
+let fullHeart = '♥';
+
+// Step 3: Uncomment to activate event listening
+function likeCallback(e) {
+  mimicServerCall()
+  .then(resp => resp.json())
+  .then(resp => {
+    console.log(resp);
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+}
+for (let glyph of articleHearts) {
+  glyph.addEventListener('click', likeCallback);
+}
